@@ -1,0 +1,64 @@
+<!-- Main landing page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CarUNI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header / Navigation -->
+<header class="header">
+  <h1>CarUNI</h1>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">How it works</a>
+    <a href="#">Contact</a>
+
+    <!-- Dynamic user area -->
+    <span id="userArea"></span>
+  </nav>
+</header>
+
+<!-- Hero section -->
+<section class="hero">
+
+  <div class="text">
+    <h2>Save money and help the planet</h2>
+
+    <!-- Auth buttons (hidden after login) -->
+    <div id="authButtons">
+      <a href="/register.html" class="btn primary">Get Started</a>
+      <a href="/login.html" class="btn secondary">Login</a>
+    </div>
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+
+<script>
+  // Check if user is logged in
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    getUser().then(user => {
+      if (user) {
+        // Replace buttons with user info
+        document.getElementById("userArea").innerHTML = `
+        <span>👤 ${user.name}</span>
+        <a href="/rides.html">Rides</a>
+        <button onclick="logout()">Logout</button>
+      `;
+
+        // Hide login/register buttons
+        document.getElementById("authButtons").style.display = "none";
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

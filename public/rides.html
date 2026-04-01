@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rides</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <h1>CarUNI</h1>
+
+    <nav>
+        <a href="/">Home</a>
+        <button onclick="logout()" class="btn secondary">Logout</button>
+    </nav>
+</header>
+
+<section class="rides">
+
+    <!-- TITLE -->
+    <h2 class="title">🚗 Create Ride</h2>
+
+    <!-- FORM BONITO -->
+    <div class="ride-form">
+        <input id="from" placeholder="From">
+        <input id="to" placeholder="To">
+        <input id="time" placeholder="Time">
+
+        <button onclick="createRide()" class="btn primary">
+            Create
+        </button>
+    </div>
+
+    <!-- LIST -->
+    <h2 class="title" style="margin-top:40px;">Available Rides</h2>
+
+    <div id="rideList" class="ride-list"></div>
+
+</section>
+
+<script src="script.js"></script>
+
+<script>
+    loadRides();
+</script>
+
+</body>
+</html>

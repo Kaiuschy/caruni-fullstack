@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - CarUNI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <h1 class="logo">Car<span>UNI</span></h1>
+
+    <div class="card" id="userCard">
+        <h2>Seu perfil 👤</h2>
+
+        <div id="userData"></div>
+
+        <button onclick="logout()" class="btn primary">Sair</button>
+    </div>
+
+</div>
+
+<script>
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "/login.html";
+    }
+
+    // buscar dados
+    fetch("http://localhost:3000/me", {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    })
+        .then(res => res.json())
+        .then(user => {
+            console.log(user);
+
+            document.getElementById("userData").innerHTML = `
+    <p><b>Nome:</b> ${user.name || "Não informado"}</p>
+    <p><b>Email:</b> ${user.email}</p>
+    <p><b>Telefone:</b> ${user.phone || "Não informado"}</p>
+    <p><b>Endereço:</b> ${user.address || "Não informado"}</p>
+  `;
+        });
+
+    function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "/login.html";
+    }
+</script>
+
+</body>
+</html>
